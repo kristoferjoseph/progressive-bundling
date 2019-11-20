@@ -8,27 +8,27 @@ let html = `
 <html lang=en>
   <head>
     <meta charset=utf-8>
-    <title>Hi!</title>
-    <link rel="stylesheet" href="https://static.begin.app/starter/default.css">
+    <title>PBJ</title>
     <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
   </head>
   <body>
-    <h1 class="center-text">
-      Hello world!
-    </h1>
-    <p class="center-text">
-      Your new route is ready to go!
-    </p>
-    <p class="center-text">
-      Learn more about building <a href="https://docs.begin.com/en/functions/http/" class="link" target="_blank">Begin HTTP functions here</a>.
-    </p>
+    <script type="module" src="/js/pages/main.js"></script>
   </body>
 </html>
 `
 
 // HTTP function
-exports.handler = async function http(req) {
-  console.log(req)
+exports.handler = async function http(req, res) {
+  if (res.push) {
+    console.log('PUSH ENABLED')
+    res.push(
+      '/js/ui/footer.js',
+      {
+        req: {'accept': '**/*'},
+        res: {'content-type': 'application/javascript'}
+      }
+    )
+  }
   return {
     headers: {
       'content-type': 'text/html; charset=utf8'

@@ -3,26 +3,27 @@ const readFile = promisify(require('fs').readFile)
 const join = require('path').join
 
 exports.handler = async function http(req) {
-  let params = req.params || {}
+  let params = req.pathParameters || {}
   let type = params.type
   let module = params.module
   let response = {
-    status: 404,
-    body: 'File not found'
+    statusCode: 404,
+    headers: {
+      'content-type': 'text/html; charset=utf8'
+    },
+    body: '<h1>File not found</h1>'
   }
   if (type && module) {
     try {
+      let file = await readFile(join(__dirname, 'node_modules', '@architect', 'views', type, module), 'utf-8')
       response = {
         headers: {
           'content-type': 'application/javascript; charset=utf8'
         },
-        body: fs.readFile(join(__dirname, 'node_modules', '@architect', 'views', type, module))
+        body:file
       }
     } catch (err) {
-      response = {
-        status: 500,
-        body: err
-      }
+      console.error('ERROR', err)
     }
   }
 
