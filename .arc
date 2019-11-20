@@ -5,7 +5,6 @@ forest-zsg
 
 @http
 get /js/:type/:module
-get /push
 
 @tables
 data
