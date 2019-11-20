@@ -1,2 +1,0 @@
-# progressive-bundling
-Begin app
