@@ -4,7 +4,7 @@ forest-zsg
 @static
 
 @http
-
+get /js/:type/:module
 
 @tables
 data
