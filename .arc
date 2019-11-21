@@ -7,6 +7,7 @@ forest-zsg
 get /js/:type/:module
 get /push
 get /
+get /bundle/:type/:module
 
 @tables
 data
